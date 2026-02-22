@@ -1,0 +1,73 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+  static const String _title = 'Flutter Stateful Clicker Counter';
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: _title,
+      theme: ThemeData(
+        // useMaterial3: false,
+        primarySwatch: Colors.blue,
+      ),
+      home: const MyWidget(),
+    );
+  }
+}
+
+class MyWidget extends StatefulWidget {
+  const MyWidget({super.key});
+
+  @override
+  State<MyWidget> createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<MyWidget> {
+  String myText = "I will change!!!";
+
+  changeText() {
+    setState(() {
+      myText = "I Changed !!!!!!!";
+    });
+  }
+
+  Color bgColor = Color(0xff99c0ec);
+
+  changeColor() {
+    setState(() {
+      bgColor =
+          (bgColor == Color(0xffc13131)) ? Colors.blueAccent : Colors.white;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        child: Scaffold(
+            backgroundColor: bgColor,
+            body: Center(
+                child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Column(
+                  children: [
+                    Container(
+                      color: Colors.orange,
+                      child: Text(myText),
+                    ),
+                    Container(
+                        color: Color(0xffdd6ef1),
+                        child: ElevatedButton(
+                          onPressed: changeColor,
+                          child: Text(myText),
+                        ))
+                  ],
+                )
+              ],
+            ))));
+  }
+}
